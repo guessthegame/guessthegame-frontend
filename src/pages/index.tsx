@@ -2,24 +2,19 @@ import type { NextPage } from 'next'
 
 const Home: NextPage = () => {
   return (
-    <main>
-      <div className="py-8 px-8 max-w-sm mx-auto bg-white rounded-xl shadow-md space-y-2 sm:py-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-6">
-        <img
-          className="block mx-auto h-24 rounded-full sm:mx-0 sm:flex-shrink-0"
-          src="/img/erin-lindford.jpg"
-          alt="Woman's Face"
-        />
-        <div className="text-center space-y-2 sm:text-left">
-          <div className="space-y-0.5">
-            <p className="text-lg text-black font-semibold">Erin Lindford</p>
-            <p className="text-gray-500 font-medium">Product Engineer</p>
-          </div>
-          <button className="px-4 py-1 text-sm text-purple-600 font-semibold rounded-full border border-purple-200 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2">
-            Message
-          </button>
-        </div>
-      </div>
-    </main>
+    <div className="bg-white rounded-xl max-w-4xl mx-auto mt-10 p-10 text-center">
+      <h1 className="font-norwester text-xl text-grey-dark mb-3">
+        Welcome to Guess The Game, the ultimate video game quizz!
+      </h1>
+      <p>
+        Guess video games based on one screenshot, and climb the leaderboard!
+      </p>
+      <img src="/images/1567291511286_fjifn3.jpg" className="w-full" />
+      <p>
+        Want to contribute? You can add your own screenshots, and see how many
+        players will guess them!
+      </p>
+    </div>
   )
 }
 
