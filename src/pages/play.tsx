@@ -8,26 +8,23 @@ const Play: NextPage = () => {
           #42
         </p>
       </div>
-      <img
-        src="/images/1567291511286_fjifn3.jpg"
-        className="w-full rounded-3xl z-20 relative"
-      />
+      <img src="/images/1567291511286_fjifn3.jpg" className="w-full rounded-3xl z-20 relative" />
       <div className="flex justify-between">
         <div className="inline-block bg-white px-5 rounded-b-3xl relative bottom-2 pt-5 pb-3">
           <p className="text-grey-dark">Added by Paulin</p>
-          <p className="text-grey">15-05-2018</p>
+          <p className="text-grey">15/05/2018</p>
         </div>
 
         <div className="inline-block bg-white px-5 rounded-b-3xl relative bottom-2 pt-5 pb-3">
           <input
             placeholder="Which game is this?"
-            className="border border-solid border-grey rounded-md p-1 mt-1"
+            className="border border-gray-300 p-2 rounded mt-1"
           />
         </div>
 
-        <div className="inline-block bg-white px-5 rounded-b-3xl relative bottom-2 pt-5 pb-3">
-          <p className="text-grey-dark">Solved by 62 people</p>
-          <p className="text-grey">First solved by Margot Brun</p>
+        <div className="inline-block bg-white px-5 rounded-b-3xl relative bottom-2 pt-5 pb-3 text-right">
+          <p className="text-grey-dark">First solved by Margot Brun</p>
+          <p className="text-grey">Solved by 62 people</p>
         </div>
       </div>
     </div>
