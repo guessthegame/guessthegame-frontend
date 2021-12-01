@@ -1,27 +1,31 @@
-import { UserIcon } from '../../styles/icons/UserIcon'
 import Link from 'next/link'
 import { useRouter } from 'next/dist/client/router'
+import { useAppSelector } from '../../redux/redux-hooks'
+import { UserIcon } from '../../styles/icons/UserIcon'
 
 export const Menu = () => {
   const router = useRouter()
+  const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn)
 
   return (
     <ul className="relative flex items-center bg-white p-2 rounded-2xl text-lg font-norwester">
       <MenuItem href="/play" isActive={router.pathname.startsWith('/play')}>
         Play
       </MenuItem>
-      <MenuItem
-        href="/leaderboard"
-        isActive={router.pathname.startsWith('/leaderboard')}
-      >
+      <MenuItem href="/leaderboard" isActive={router.pathname.startsWith('/leaderboard')}>
         Leaderboard
       </MenuItem>
+      {isLoggedIn ? (
+        <MenuItem href="/add" isActive={router.pathname.startsWith('/add')}>
+          Upload
+        </MenuItem>
+      ) : null}
       <MenuItem
-        href="/account"
+        href={isLoggedIn ? '/account/me' : '/account/sign-in'}
         isActive={router.pathname.startsWith('/account')}
-        center
+        center={isLoggedIn}
       >
-        <UserIcon className="w-7" />
+        {isLoggedIn ? <UserIcon className="w-7" /> : 'Sign in'}
       </MenuItem>
     </ul>
   )
@@ -30,14 +34,9 @@ export const Menu = () => {
 interface MenuItemProps {
   href: string
   isActive: boolean
-  center?: true
+  center?: boolean
 }
-const MenuItem: React.FC<MenuItemProps> = ({
-  children,
-  href,
-  isActive,
-  center,
-}) => (
+const MenuItem: React.FC<MenuItemProps> = ({ children, href, isActive, center }) => (
   <li
     className={`px-3  hover:text-grey-dark transition-all ${
       center ? 'flex flex-col items-center' : ''
