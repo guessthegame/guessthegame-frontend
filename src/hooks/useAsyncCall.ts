@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react'
+import { useCallback, useState } from 'react'
 import toast from 'react-hot-toast'
 import { HttpError } from '../services/http/HttpError.class'
 
@@ -10,18 +10,18 @@ interface OptionsType {
   }
 }
 
-export function useAsyncCall<T, R>(
-  callback: (params: T) => Promise<R>,
+export function useAsyncCall<T extends unknown[], R>(
+  callback: (...params: T) => Promise<R>,
   { toastMessages }: OptionsType = {}
 ) {
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const onSubmit = useCallback(
-    (params: T): Promise<{ ok: true; body: R } | { ok: false; error: HttpError }> => {
+    (...params: T): Promise<{ ok: true; body: R } | { ok: false; error: HttpError }> => {
       setIsSubmitting(true)
       const toastId = toast.loading(toastMessages?.loading || 'Loading...')
 
-      return callback(params).then(
+      return callback(...params).then(
         (body) => {
           setIsSubmitting(false)
           toast.success(toastMessages?.success || 'Success!', { id: toastId })

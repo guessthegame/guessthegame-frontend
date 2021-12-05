@@ -16,7 +16,7 @@ export const Menu = () => {
         Leaderboard
       </MenuItem>
       {isLoggedIn ? (
-        <MenuItem href="/add" isActive={router.pathname.startsWith('/add')}>
+        <MenuItem href="/upload" isActive={router.pathname.startsWith('/upload')}>
           Upload
         </MenuItem>
       ) : null}

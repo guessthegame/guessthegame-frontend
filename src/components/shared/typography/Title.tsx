@@ -6,7 +6,7 @@ interface TitleProps extends HTMLProps<HTMLHeadingElement> {
   level: LevelType
 }
 export const Title: React.FC<TitleProps> = ({ level, className = '', ...props }) => {
-  const classes = `${className} font-norwester text-2xl`
+  const classes = `${className} font-norwester text-2xl text-grey-dark`
   if (level === 'h2') {
     return <h2 className={classes} {...props} />
   }

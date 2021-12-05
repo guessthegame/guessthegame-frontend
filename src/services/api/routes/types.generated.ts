@@ -19,7 +19,10 @@ export interface paths {
     get: operations['MeAuthController_me']
   }
   '/v1/screenshots': {
-    post: operations['UploadScreenshotController_uploadScreenshot']
+    post: operations['UploadScreenshotController_create']
+  }
+  '/v1/screenshots/image': {
+    post: operations['UploadScreenshotController_upload']
   }
 }
 
@@ -63,9 +66,13 @@ export interface components {
       email: string | null
     }
     UploadScreenshotControllerRequest: {
-      canonicalName: string
+      imageId: string
+      originalName: string
       year: number
       alternativeNames: string[]
+    }
+    UploadScreenshotControllerResponse: {
+      id: number
     }
   }
 }
@@ -147,15 +154,25 @@ export interface operations {
       }
     }
   }
-  UploadScreenshotController_uploadScreenshot: {
+  UploadScreenshotController_create: {
     parameters: {}
     responses: {
-      201: unknown
+      default: {
+        content: {
+          'application/json': components['schemas']['UploadScreenshotControllerResponse']
+        }
+      }
     }
     requestBody: {
       content: {
         'application/json': components['schemas']['UploadScreenshotControllerRequest']
       }
+    }
+  }
+  UploadScreenshotController_upload: {
+    parameters: {}
+    responses: {
+      201: unknown
     }
   }
 }
