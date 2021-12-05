@@ -1,8 +1,8 @@
-import { SmallContainer } from '../shared/containers/SmallContainer'
 import { useForm } from 'react-hook-form'
 import { TextInput } from '../shared/form/TextInput'
 import { Button } from '../shared/buttons/Button'
 import { Link } from '../shared/buttons/Link'
+import { SmallContainer } from '../shared/containers/ContainerWithTitle'
 
 type FormData = {
   username: string

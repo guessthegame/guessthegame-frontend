@@ -28,22 +28,28 @@ type HttpCallProps = {
       body: unknown
     }
 )
+
 async function httpCall<T>(props: HttpCallProps): Promise<T> {
+  const body =
+    (props.verb === 'POST' || props.verb === 'PATCH' || props.verb === 'PUT') && props.body
+      ? props.body instanceof FormData
+        ? props.body
+        : JSON.stringify(props.body)
+      : undefined
+
   const response = await fetch(props.url, {
     method: props.verb,
-    body:
-      props.verb === 'POST' || props.verb === 'PATCH' || props.verb === 'PUT'
-        ? JSON.stringify(props.body)
-        : undefined,
+    body,
     headers: {
       Accept: 'application/json',
-      'Content-Type': 'application/json',
       Authorization: props.accessToken ? `bearer ${props.accessToken}` : '',
+      ...(typeof body === 'string' ? { 'Content-Type': 'application/json' } : {}),
     },
   })
-  const body = await response.json()
+
+  const responseBody = await response.json()
   if (!response.ok) {
-    throw new HttpError(response, body)
+    throw new HttpError(response, responseBody)
   }
-  return body
+  return responseBody
 }

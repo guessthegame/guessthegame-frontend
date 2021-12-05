@@ -1,4 +1,3 @@
-import { SmallContainer } from '../shared/containers/SmallContainer'
 import { useForm } from 'react-hook-form'
 import { TextInput } from '../shared/form/TextInput'
 import { Button } from '../shared/buttons/Button'
@@ -7,6 +6,7 @@ import { apiCreateTokens } from '../../services/api/routes/auth/create-token'
 import { useAsyncCall } from '../../hooks/useAsyncCall'
 import { useDispatch } from 'react-redux'
 import { logIn } from '../../redux/slices/auth.slice'
+import { SmallContainer } from '../shared/containers/ContainerWithTitle'
 
 type FormData = {
   username: string

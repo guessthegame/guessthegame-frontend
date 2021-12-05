@@ -4,5 +4,5 @@
   },
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "cSpell.words": ["Leaderboard", "Norwester", "openapi", "reduxjs", "tailwindcss"]
+  "cSpell.words": ["dropzone", "Leaderboard", "Norwester", "openapi", "reduxjs", "tailwindcss"]
 }
