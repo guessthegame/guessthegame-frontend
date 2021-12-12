@@ -64,57 +64,51 @@ const Play: NextPage = () => {
       {screenshot ? (
         <ScreenshotImage
           screenshot={screenshot.image}
-          className={`rounded-3xl z-20 relative w-full transition ${isLoading ? 'opacity-50' : ''}`}
+          className={`sm:rounded-xl md:rounded-3xl z-20 relative w-full transition ${
+            isLoading ? 'opacity-50' : ''
+          }`}
         />
       ) : null}
       <div className="flex align-top">
-        <div className="flex-1">
-          <div className="inline-block bg-white px-5 rounded-b-3xl pt-6 pb-3 relative bottom-3">
+        <div className="hidden md:block flex-1">
+          <div className="hidden lg:inline-block bg-white px-5 rounded-b-3xl pt-6 pb-3 relative bottom-3">
             <p className="text-grey-dark">Added by {screenshot?.addedBy.username}</p>
             <p className="text-grey">{displayDate(screenshot?.creationDate)}</p>
           </div>
         </div>
 
-        <div className="flex-1 flex justify-center relative">
-          <div>
-            <div className="px-5 py-4 bg-white rounded-b-3xl flex items-center">
-              <button
-                type="button"
-                onClick={handleOnPrevious}
-                className="border border-black w-6 h-6 rounded-full flex items-center"
-              >
-                <div
-                  className="border-l border-b border-black w-2 h-2 rotate-45 relative"
-                  style={{ left: 9 }}
-                ></div>
-              </button>
-              <div className="mx-5 w-64 h-10 flex justify-center items-center text-grey">
-                {isLoading ? (
-                  <p>Loading...</p>
-                ) : (
-                  <input
-                    disabled={isLoading}
-                    placeholder="Which game is this?"
-                    className="border border-grey-dark p-2 rounded w-full"
-                  />
-                )}
-              </div>
-              <button
-                onClick={handleOnNext}
-                disabled={isLoading}
-                className="border border-black w-6 h-6 rounded-full flex items-center"
-              >
-                <div
-                  className="border-r border-t border-black w-2 h-2 rotate-45 relative"
-                  style={{ left: 5 }}
-                ></div>
-              </button>
-            </div>
-          </div>
+        <div className="flex-1 flex w-full justify-center relative px-5 pt-6 pb-3 bottom-3 bg-white rounded-b-3xl items-center">
+          <button
+            type="button"
+            onClick={handleOnPrevious}
+            className="border border-black w-6 h-6 rounded-full flex items-center"
+          >
+            <div
+              className="border-l border-b border-black w-2 h-2 rotate-45 relative"
+              style={{ left: 9 }}
+            ></div>
+          </button>
+
+          <input
+            disabled={isLoading}
+            placeholder="Which game is this?"
+            className="border border-grey-dark p-2 rounded text-grey mx-10 flex-1 min-w-0"
+          />
+
+          <button
+            onClick={handleOnNext}
+            disabled={isLoading}
+            className="border border-black w-6 h-6 rounded-full flex items-center"
+          >
+            <div
+              className="border-r border-t border-black w-2 h-2 rotate-45 relative"
+              style={{ left: 5 }}
+            ></div>
+          </button>
         </div>
 
-        <div className="flex-1 text-right">
-          <div className="inline-block bg-white px-5 rounded-b-3xl pt-6 pb-3 relative bottom-3">
+        <div className="hidden md:block flex-1 text-right ">
+          <div className="hidden lg:inline-block  bg-white px-5 rounded-b-3xl pt-6 pb-3 relative bottom-3">
             {screenshot?.firstSolvedBy ? (
               <>
                 <p className="text-grey-dark">
@@ -123,7 +117,7 @@ const Play: NextPage = () => {
                 <p className="text-grey">Solved by {screenshot.totalSolves} people</p>
               </>
             ) : (
-              <p className="text-grey align-right">Nobody solved it yet.</p>
+              <p className="text-grey align-right">Nobody solved this one yet.</p>
             )}
           </div>
         </div>
