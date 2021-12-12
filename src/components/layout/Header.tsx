@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 export const Header = () => {
   return (
-    <header className="flex items-center justify-between">
+    <header className="flex items-center justify-between px-3 sm:px-0">
       <Logo />
       <Menu />
     </header>

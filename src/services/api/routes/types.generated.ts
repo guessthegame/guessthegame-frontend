@@ -24,10 +24,16 @@ export interface paths {
   '/v1/frontend/play/unsolved-screenshot-unauthenticated': {
     post: operations['GetUnsolvedScreenshotController_unauthenticated']
   }
-  '/v1/screenshots': {
+  '/v1/frontend/play/get-screenshot/{id}/unauthenticated': {
+    get: operations['GetScreenshotController_getUnauthenticated']
+  }
+  '/v1/frontend/play/get-screenshot/{id}/authenticated': {
+    get: operations['GetScreenshotController_getAuthenticated']
+  }
+  '/v1/frontend/screenshots': {
     post: operations['UploadScreenshotController_create']
   }
-  '/v1/screenshots/image': {
+  '/v1/frontend/screenshots/image': {
     post: operations['UploadScreenshotController_upload']
   }
 }
@@ -80,6 +86,29 @@ export interface components {
     }
     GetUnsolvedScreenshotControllerResponse: {
       id: number | null
+    }
+    GetScreenshotControllerResponse_User: {
+      username: string
+    }
+    GetScreenshotControllerResponse_Transformations: {
+      top: number
+      bottom: number
+      left: number
+      right: number
+      angle: number
+      flipY: boolean
+      invert: boolean
+    }
+    GetScreenshotControllerResponse_Image: {
+      transformedUuid: string
+      transformations: components['schemas']['GetScreenshotControllerResponse_Transformations']
+    }
+    GetScreenshotControllerResponse: {
+      creationDate: string
+      addedBy: components['schemas']['GetScreenshotControllerResponse_User']
+      firstSolvedBy: components['schemas']['GetScreenshotControllerResponse_User'] | null
+      totalSolves: number
+      image: components['schemas']['GetScreenshotControllerResponse_Image']
     }
     UploadScreenshotControllerRequest: {
       imageId: string
@@ -197,6 +226,34 @@ export interface operations {
     requestBody: {
       content: {
         'application/json': components['schemas']['GetUnsolvedScreenshotControllerRequest']
+      }
+    }
+  }
+  GetScreenshotController_getUnauthenticated: {
+    parameters: {
+      path: {
+        id: number
+      }
+    }
+    responses: {
+      default: {
+        content: {
+          'application/json': components['schemas']['GetScreenshotControllerResponse']
+        }
+      }
+    }
+  }
+  GetScreenshotController_getAuthenticated: {
+    parameters: {
+      path: {
+        id: number
+      }
+    }
+    responses: {
+      default: {
+        content: {
+          'application/json': components['schemas']['GetScreenshotControllerResponse']
+        }
       }
     }
   }

@@ -1,5 +1,4 @@
 import type { NextPage } from 'next'
-import { ScreenshotImage } from '../components/shared/ScreenshotImage'
 
 const Home: NextPage = () => {
   return (
@@ -14,7 +13,7 @@ const Home: NextPage = () => {
           them!
         </p>
 
-        <ScreenshotImage className="max-w-full" />
+        {/* <ScreenshotImage className="max-w-full" /> */}
       </div>
     </>
   )

@@ -5,11 +5,11 @@ type Request = components['schemas']['UploadScreenshotControllerRequest']
 type Response = components['schemas']['UploadScreenshotControllerResponse']
 
 export function apiCreateScreenshot(requestBody: Request): Promise<Response> {
-  return authenticatedPost('/screenshots', requestBody)
+  return authenticatedPost('/frontend/screenshots', requestBody)
 }
 
 export function apiUploadImage(image: File): Promise<{ uuid: string }> {
   const data = new FormData()
   data.append('file', image)
-  return authenticatedPost('/screenshots/image', data)
+  return authenticatedPost('/frontend/screenshots/image', data)
 }

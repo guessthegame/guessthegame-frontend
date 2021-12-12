@@ -21,7 +21,7 @@ export const playSlice = createSlice({
       }
       return {
         ...state,
-        screenshotsViewed: [payload.id, ...state.screenshotsViewed],
+        screenshotsViewed: [...state.screenshotsViewed, payload.id],
       }
     },
     removeFromScreenshotViewed: (state, { payload }: PayloadAction<{ id: number }>) => {

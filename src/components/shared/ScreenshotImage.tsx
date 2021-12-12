@@ -1,14 +1,20 @@
 /* eslint-disable @next/next/no-img-element */
 import { useEffect } from 'react'
 import { useWindowFocus } from '../../hooks/useWindowFocus'
+import { ImageTransformationsType } from '../../types/ImageTransformations.type'
 
 interface ScreenshotImageProps {
-  className: string
+  screenshot: {
+    transformedUuid: string
+    transformations: ImageTransformationsType
+  }
+  className?: string
 }
-export const ScreenshotImage = ({ className = '' }: ScreenshotImageProps) => {
+export const ScreenshotImage = ({ screenshot, className = '' }: ScreenshotImageProps) => {
   const isWindowsFocused = useWindowFocus()
 
   useEffect(() => {
+    const { transformedUuid, transformations } = screenshot
     const canvas = document.querySelector('canvas')
     if (!canvas) {
       return
@@ -17,24 +23,41 @@ export const ScreenshotImage = ({ className = '' }: ScreenshotImageProps) => {
     if (!ctx) {
       return
     }
+    ctx.resetTransform()
     const base_image = new Image()
-    base_image.src = '/images/7664c515-da15-478f-a9d3-eafd22ae0d9a.jpg'
+    base_image.src = `${process.env.NEXT_PUBLIC_GTG_URL?.slice(
+      0,
+      -3
+    )}/uploads/${transformedUuid}.transformed.jpg`
     base_image.onload = function () {
-      ctx.drawImage(base_image, 84, 83)
-      ctx.rotate((-15 * Math.PI) / 180)
-      ctx.drawImage(base_image, -Math.sin((15 * Math.PI) / 180) * 720 - 84, -83)
+      ctx.drawImage(base_image, transformations.left, transformations.top)
+      ctx.rotate((-transformations.angle * Math.PI) / 180)
+      ctx.drawImage(
+        base_image,
+        -Math.sin((transformations.angle * Math.PI) / 180) * 720 - transformations.left,
+        -transformations.top
+      )
     }
-  }, [isWindowsFocused])
+  }, [isWindowsFocused, screenshot])
 
   return isWindowsFocused ? (
     <canvas
-      style={{ transform: 'scaleY(-1)', filter: 'invert(1)' }}
+      style={{
+        transform: screenshot.transformations.flipY ? 'scaleY(-1)' : '',
+        filter: screenshot.transformations.invert ? 'invert(1)' : '',
+      }}
       className={className}
       onContextMenu={(e) => e.preventDefault()}
       width={1280}
       height={720}
     />
   ) : (
-    <img width={1280} height={720} alt="Screenshot" />
+    <img
+      style={{ backgroundColor: '#e8e8e8' }}
+      width={1280}
+      height={720}
+      className={className}
+      alt="Sorry, image hidden to prevent cheating"
+    />
   )
 }
