@@ -16,10 +16,10 @@ type FormData = {
 export const SignInForm = () => {
   const dispatch = useDispatch()
   const { register, handleSubmit } = useForm<FormData>()
-  const { onSubmit } = useAsyncCall(apiCreateTokens)
+  const { submit } = useAsyncCall(apiCreateTokens)
 
   const handleOnSubmit = handleSubmit(async (data) => {
-    const response = await onSubmit(data)
+    const response = await submit(data)
     if (response.ok) {
       dispatch(logIn(response.body))
     }
@@ -27,7 +27,7 @@ export const SignInForm = () => {
 
   return (
     <div>
-      <SmallContainer title="Sign in">
+      <SmallContainer title="Log in">
         <form onSubmit={handleOnSubmit}>
           <label>
             <p className="mt-3">Username (or email)</p>
@@ -39,7 +39,7 @@ export const SignInForm = () => {
           </label>
           <div className="text-center">
             <p className="mt-6 mb-3">
-              <Button type="submit">Sign in</Button>
+              <Button type="submit">Log in</Button>
             </p>
           </div>
         </form>

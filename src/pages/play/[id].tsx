@@ -1,6 +1,20 @@
 import type { NextPage } from 'next'
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
+import { useAppDispatch } from '../../redux/redux-hooks'
+import { playActions } from '../../redux/slices/play.slice'
 
 const Play: NextPage = () => {
+  const router = useRouter()
+  const { id } = router.query
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    if (typeof id === 'string') {
+      dispatch(playActions.addToScreenshotsViewed({ id: parseInt(id, 10) }))
+    }
+  }, [dispatch, id])
+
   return (
     <div>
       <div className="flex justify-center">

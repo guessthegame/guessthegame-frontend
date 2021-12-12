@@ -18,6 +18,12 @@ export interface paths {
   '/v1/auth/me': {
     get: operations['MeAuthController_me']
   }
+  '/v1/frontend/play/unsolved-screenshot-authenticated': {
+    post: operations['GetUnsolvedScreenshotController_authenticated']
+  }
+  '/v1/frontend/play/unsolved-screenshot-unauthenticated': {
+    post: operations['GetUnsolvedScreenshotController_unauthenticated']
+  }
   '/v1/screenshots': {
     post: operations['UploadScreenshotController_create']
   }
@@ -34,7 +40,7 @@ export interface components {
       browserToken?: string
       email?: string
     }
-    RefreshTokenAuthControllerResponse: {
+    RegisterAuthControllerResponse: {
       accessToken: string
       refreshToken: string
     }
@@ -54,6 +60,10 @@ export interface components {
       /** Refresh Token, obtained after a login */
       refreshToken: string
     }
+    RefreshTokenAuthControllerResponse: {
+      accessToken: string
+      refreshToken: string
+    }
     DeleteTokensAuthRequest: {
       refreshToken: string
     }
@@ -64,6 +74,12 @@ export interface components {
       uuid: string
       username: string | null
       email: string | null
+    }
+    GetUnsolvedScreenshotControllerRequest: {
+      exclude: number[]
+    }
+    GetUnsolvedScreenshotControllerResponse: {
+      id: number | null
     }
     UploadScreenshotControllerRequest: {
       imageId: string
@@ -89,7 +105,7 @@ export interface operations {
     responses: {
       default: {
         content: {
-          'application/json': components['schemas']['RefreshTokenAuthControllerResponse']
+          'application/json': components['schemas']['RegisterAuthControllerResponse']
         }
       }
     }
@@ -151,6 +167,36 @@ export interface operations {
         content: {
           'application/json': components['schemas']['MeAuthControllerResponse']
         }
+      }
+    }
+  }
+  GetUnsolvedScreenshotController_authenticated: {
+    parameters: {}
+    responses: {
+      default: {
+        content: {
+          'application/json': components['schemas']['GetUnsolvedScreenshotControllerResponse']
+        }
+      }
+    }
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GetUnsolvedScreenshotControllerRequest']
+      }
+    }
+  }
+  GetUnsolvedScreenshotController_unauthenticated: {
+    parameters: {}
+    responses: {
+      default: {
+        content: {
+          'application/json': components['schemas']['GetUnsolvedScreenshotControllerResponse']
+        }
+      }
+    }
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GetUnsolvedScreenshotControllerRequest']
       }
     }
   }

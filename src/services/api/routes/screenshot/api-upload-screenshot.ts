@@ -1,5 +1,5 @@
-import { authenticatedPost } from '../api'
-import { components } from './types.generated'
+import { authenticatedPost } from '../../api'
+import { components } from '../types.generated'
 
 type Request = components['schemas']['UploadScreenshotControllerRequest']
 type Response = components['schemas']['UploadScreenshotControllerResponse']

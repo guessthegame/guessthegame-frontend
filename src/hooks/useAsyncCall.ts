@@ -16,8 +16,10 @@ export function useAsyncCall<T extends unknown[], R>(
 ) {
   const [isSubmitting, setIsSubmitting] = useState(false)
 
-  const onSubmit = useCallback(
-    (...params: T): Promise<{ ok: true; body: R } | { ok: false; error: HttpError }> => {
+  const submit = useCallback(
+    (
+      ...params: T
+    ): Promise<{ ok: true; body: R } | { ok: false; errorCode: string; error: HttpError }> => {
       setIsSubmitting(true)
       const toastId = toast.loading(toastMessages?.loading || 'Loading...')
 
@@ -29,11 +31,17 @@ export function useAsyncCall<T extends unknown[], R>(
         },
         (err) => {
           setIsSubmitting(false)
-          toast.error(toastMessages?.error || err.message, { id: toastId })
           if (err instanceof HttpError) {
-            return { ok: false, error: err }
+            const errorCode = typeof err.body?.message === 'string' ? err.body.message : err.message
+            toast.error(toastMessages?.error || err.message, { id: toastId })
+            return { ok: false, errorCode, error: err }
           } else {
-            return { ok: false, error: new HttpError({ status: 0, statusText: err.message }) }
+            toast.error(toastMessages?.error || err.err.message, { id: toastId })
+            return {
+              ok: false,
+              errorCode: err.message,
+              error: new HttpError({ status: 0, statusText: err.message }),
+            }
           }
         }
       )
@@ -41,5 +49,5 @@ export function useAsyncCall<T extends unknown[], R>(
     [callback, toastMessages]
   )
 
-  return { onSubmit, isSubmitting }
+  return { submit, isSubmitting }
 }

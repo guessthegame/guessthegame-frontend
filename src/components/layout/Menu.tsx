@@ -21,11 +21,11 @@ export const Menu = () => {
         </MenuItem>
       ) : null}
       <MenuItem
-        href={isLoggedIn ? '/account/me' : '/account/sign-in'}
+        href={isLoggedIn ? '/account/me' : '/account/sign-up'}
         isActive={router.pathname.startsWith('/account')}
-        center={isLoggedIn}
+        center
       >
-        {isLoggedIn ? <UserIcon className="w-7" /> : 'Sign in'}
+        <UserIcon className="w-7" />
       </MenuItem>
     </ul>
   )
@@ -40,7 +40,7 @@ const MenuItem: React.FC<MenuItemProps> = ({ children, href, isActive, center })
   <li
     className={`px-3  hover:text-grey-dark transition-all ${
       center ? 'flex flex-col items-center' : ''
-    } ${isActive ? 'text-grey-dark' : 'text-grey'}`}
+    } ${isActive ? 'text-grey-dark fill-grey-dark' : 'text-grey fill-grey'}`}
   >
     {isActive ? (
       <span

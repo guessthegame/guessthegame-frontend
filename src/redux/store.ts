@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
 
 import authReducer from './slices/auth.slice'
+import playReducer from './slices/play.slice'
 
 const store = configureStore({
   reducer: {
     auth: authReducer,
+    play: playReducer,
   },
 })
 

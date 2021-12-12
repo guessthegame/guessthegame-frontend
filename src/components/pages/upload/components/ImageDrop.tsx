@@ -53,7 +53,7 @@ export const ImageDrop = ({ onDrop, onRemove, image }: ImageDropProps) => {
           {image ? (
             <p className="text-center mt-1">
               {image.name} -{' '}
-              <button type="button" className="underline text-red-500" onClick={onRemove}>
+              <button type="button" className="underline text-orange" onClick={onRemove}>
                 Cancel
               </button>
             </p>

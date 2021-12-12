@@ -5,7 +5,7 @@ interface ButtonProps extends HTMLProps<HTMLButtonElement> {
 }
 export const Button: React.FC<ButtonProps> = ({ className, type = 'button', ...props }) => (
   <button
-    className={`transition-all rounded bg-red-500 hover:bg-red-700 text-white px-3 py-1 font-norwester ${className}`}
+    className={`transition-all rounded bg-orange hover:bg-orange-dark text-white px-3 py-1 font-norwester ${className}`}
     {...props}
     type={type}
   />

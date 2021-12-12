@@ -5,7 +5,7 @@ import { useAsyncCall } from '../../../hooks/useAsyncCall'
 import {
   apiCreateScreenshot,
   apiUploadImage,
-} from '../../../services/api/routes/api-upload-screenshot'
+} from '../../../services/api/routes/screenshot/api-upload-screenshot'
 import { Button } from '../../shared/buttons/Button'
 import { MediumContainer } from '../../shared/containers/ContainerWithTitle'
 import { TextInput } from '../../shared/form/TextInput'
@@ -36,7 +36,7 @@ export const UploadForm = () => {
   // Router
   const router = useRouter()
 
-  const { onSubmit } = useAsyncCall(
+  const { submit: onSubmit } = useAsyncCall(
     async (image: File, data: FormData) => {
       const { uuid } = await apiUploadImage(image)
       const { id } = await apiCreateScreenshot({

@@ -5,6 +5,6 @@ interface LinkProps extends NextLinkProps {
 }
 export const Link: React.FC<LinkProps> = ({ children, className = '', ...props }) => (
   <NextLink {...props}>
-    <a className={`text-red-500 hover:underline ${className}`}>{children}</a>
+    <a className={`text-orange hover:underline ${className}`}>{children}</a>
   </NextLink>
 )

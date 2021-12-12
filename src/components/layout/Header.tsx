@@ -11,7 +11,7 @@ export const Header = () => {
 }
 
 const Logo = () => (
-  <h1 className="font-norwester text-red-500 text-3xl">
+  <h1 className="font-norwester text-orange text-3xl">
     <Link href="/">
       <a className="cursor-pointer">
         <span className="hidden sm:block">Guess The Game!</span>
