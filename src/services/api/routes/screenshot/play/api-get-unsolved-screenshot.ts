@@ -9,6 +9,7 @@ type Response = components['schemas']['GetUnsolvedScreenshotControllerResponse']
 export function apiGetUnsolvedScreenshotId(): Promise<Response> {
   const { auth, play } = store.getState()
   const exclude = play.screenshotsViewed
+  console.log(exclude)
   const body: Request = { exclude }
   if (auth.isLoggedIn) {
     return authenticatedPost('/frontend/play/unsolved-screenshot-authenticated', body)
